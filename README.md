@@ -47,9 +47,21 @@ archwiki <query>  # Direct search
 3. **Utility**: `c` to yank code blocks directly into your terminal saves time when you're lazy (and we all are).
 4. **Offline**: It caches what you read, because sometimes you break your networking.
 
-## 5 License
+## 5 Contributing
 
-MIT. 
+Contributions are welcome. If you want to help improve the project:
+
+1. Check the [CONTRIBUTING.md](CONTRIBUTING.md) guide.
+2. Use the [Issue Templates](https://github.com/Harshil-Anuwadia/archwiki-tui/issues/new/choose) for bugs and features.
+3. Submit a PR.
+
+## 6 Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
+
+## 7 License
+
+[MIT](LICENSE). 
 
 ---
 *I use Arch btw.*
