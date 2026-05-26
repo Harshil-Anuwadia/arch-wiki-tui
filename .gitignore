@@ -1,0 +1,19 @@
+# Build artifacts
+bin/
+archwiki
+
+# Logs and temporary files
+*.log
+*.tmp
+.DS_Store
+
+# OS specific
+.idea/
+.vscode/
+*.swp
+
+# Testing
+coverage.out
+
+# Go specific
+vendor/

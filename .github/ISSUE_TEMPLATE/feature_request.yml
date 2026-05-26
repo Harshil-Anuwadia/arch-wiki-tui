@@ -1,0 +1,23 @@
+name: Feature Request
+description: Suggest an idea for archwiki-tui
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What is your suggestion?
+      description: A clear and concise description of what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why would this be useful?
+      description: Explain the use case for this feature.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
