@@ -2,9 +2,10 @@
 
 A terminal browser for the Arch Wiki. No bloat. No browser. Just the wiki.
 
+Because if you're already in a TTY fixing your bootloader, you shouldn't have to launch X11 just to read about kernel parameters.
+
 **Note:** This is an initial beta release. Expect bugs. If it breaks your workflow, you get to keep the pieces. PRs welcome.
 
-Because if you're already in a TTY fixing your bootloader, you shouldn't have to launch X11 just to read about kernel parameters.
 
 ## 1 Installation
 
