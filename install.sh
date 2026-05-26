@@ -2,7 +2,8 @@
 
 # archwiki-tui - Automated Installer
 # ----------------------------------
-# This script installs archwiki-tui to your system.
+# This script performs a full zero-labor installation of archwiki-tui.
+# It automatically detects your distro and installs all missing dependencies.
 
 set -euo pipefail
 
@@ -23,13 +24,10 @@ error() { echo -e "${RED}[ERROR]${NC} $1" >&2; exit 1; }
 
 banner() {
     echo -e "${BLUE}${BOLD}"
-    echo "    ___                __               _ __   _ "
-    echo "   /   |  _____________/ /_ _      _(_/ /__(_)"
-    echo "  / /| | / ___/ ___/ __ \ | /| / / / //_/ / "
-    echo " / ___ |/ /  / /__/ / / / |/ |/ / / / ,< / /  "
-    echo "/_/  |_/_/   \___/_/ /_/\__/|__/_/_/_/|_/_/   "
+    echo "  ▄▀█ █▀█ █▀▀ █░█ █   █ █ █▄▀ █"
+    echo "  █▀█ █▀▄ █▄▄ █▀█ █▄█▄█ █ █░█ █"
     echo -e "${NC}"
-    echo -e "Installing the definitive Arch Wiki terminal browser...\n"
+    echo -e "  The definitive Arch Wiki terminal browser.\n"
 }
 
 # Check for root/sudo
@@ -39,28 +37,57 @@ fi
 
 banner
 
-# Verify core dependencies
-info "Verifying system dependencies..."
-for cmd in git curl tar; do
+# Detect Distro and install base tools
+info "Detecting system environment..."
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    DISTRO=$ID
+else
+    DISTRO="unknown"
+fi
+
+install_pkg() {
+    info "Installing missing dependency: $1..."
+    case "$DISTRO" in
+        arch|manjaro) pacman -S --needed --noconfirm "$@" ;;
+        ubuntu|debian|kali|pop|linuxmint) 
+            apt-get update -qq
+            apt-get install -y -qq "$@" 
+            ;;
+        fedora|rhel|centos) dnf install -y -q "$@" ;;
+        *) info "Unsupported distro for auto-install. Please install '$1' manually." ;;
+    esac
+}
+
+# Ensure build tools are present
+for cmd in git make gcc curl tar; do
     if ! command -v "$cmd" &> /dev/null; then
-        error "$cmd is not installed. Please install it and try again."
+        pkg=$cmd
+        if [ "$cmd" == "gcc" ]; then
+            case "$DISTRO" in
+                ubuntu|debian) pkg="build-essential" ;;
+                fedora) pkg="gcc gcc-c++" ;;
+            esac
+        fi
+        install_pkg "$pkg"
     fi
 done
 
 # Handle Go dependency
 if ! command -v go &> /dev/null; then
-    info "Go not found. Installing Go 1.25.0 to /usr/local/go..."
+    GO_VER="1.25.0"
+    info "Go not found. Installing Go ${GO_VER}..."
     GO_ARCH="amd64"
     if [[ "$(uname -m)" == "aarch64" ]]; then GO_ARCH="arm64"; fi
     
-    GO_TMP="/tmp/go1.25.0.linux-${GO_ARCH}.tar.gz"
-    curl -fL "https://go.dev/dl/go1.25.0.linux-${GO_ARCH}.tar.gz" -o "$GO_TMP"
+    GO_TMP="/tmp/go${GO_VER}.linux-${GO_ARCH}.tar.gz"
+    curl -fL "https://go.dev/dl/go${GO_VER}.linux-${GO_ARCH}.tar.gz" -o "$GO_TMP"
     
     rm -rf /usr/local/go
     tar -C /usr/local -xzf "$GO_TMP"
-    export PATH=$PATH:/usr/local/go/bin
     rm "$GO_TMP"
-    success "Go installed successfully."
+    export PATH=$PATH:/usr/local/go/bin
+    success "Go installed to /usr/local/go."
 fi
 
 # Build from source
@@ -70,10 +97,10 @@ git clone --depth 1 "$REPO_URL" "$TMP_DIR" &> /dev/null || error "Failed to clon
 
 cd "$TMP_DIR"
 
-info "Building $APP_NAME (v$(cat VERSION))..."
-# Use the local go if we just installed it
+info "Building $APP_NAME..."
+# Ensure the new Go is in PATH for the build subshell
 export PATH=$PATH:/usr/local/go/bin
-make build &> /dev/null || error "Build failed. Check your Go environment."
+make build &> /dev/null || error "Build failed. Ensure 'make' and 'go' are functional."
 
 # Final installation
 info "Deploying binary to $INSTALL_DIR/$APP_NAME..."
@@ -85,5 +112,5 @@ info "Cleaning up..."
 rm -rf "$TMP_DIR"
 
 echo ""
-success "Installation complete! You can now run '$APP_NAME'."
-info "Type '$APP_NAME --help' to get started."
+success "Installation complete! Run '$APP_NAME' to start."
+info "Tip: Run '$APP_NAME <query>' for a direct search."

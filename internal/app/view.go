@@ -767,11 +767,8 @@ func (m *Model) viewHomeScreen(width int) string {
 	banner := `   archwiki-tui
    ────────────`
 	if width >= 60 {
-		banner = `    ___                __               _ __   _ 
-   /   |  _____________/ /_ _      _(_/ /__(_)
-  / /| | / ___/ ___/ __ \ | /| / / / //_/ / 
- / ___ |/ /  / /__/ / / / |/ |/ / / / ,< / /  
-/_/  |_/_/   \___/_/ /_/\__/|__/_/_/_/|_/_/   `
+		banner = `  ▄▀█ █▀█ █▀▀ █░█ █   █ █ █▄▀ █
+  █▀█ █▀▄ █▄▄ █▀█ █▄█▄█ █ █░█ █`
 	}
 
 	suggestion := m.homePrimarySuggestion()

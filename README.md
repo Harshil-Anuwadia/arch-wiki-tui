@@ -1,15 +1,11 @@
 # archwiki-tui
 
 ```text
-    ___                __               _ __   _ 
-   /   |  _____________/ /_ _      _(_/ /__(_)
-  / /| | / ___/ ___/ __ \ | /| / / / //_/ / 
- / ___ |/ /  / /__/ / / / |/ |/ / / / ,< / /  
-/_/  |_/_/   \___/_/ /_/\__/|__/_/_/_/|_/_/   
+  ▄▀█ █▀█ █▀▀ █░█ █   █ █ █▄▀ █
+  █▀█ █▀▄ █▄▄ █▀█ █▄█▄█ █ █░█ █
 ```
 
-`archwiki-tui` is a terminal client for searching and reading the Arch Wiki.
- It is built for users who want to stay in their terminal workflow and avoid the context-switching that comes with opening a web browser for documentation.
+`archwiki-tui` is a terminal client for searching and reading the Arch Wiki. It is built for users who want to stay in their terminal workflow and avoid the context-switching that comes with opening a web browser for documentation.
 
 It doesn't just wrap `curl`; it uses a dedicated rendering engine to convert wiki HTML into structured, readable documents with support for tables, callout boxes, and code block extraction.
 
@@ -24,11 +20,11 @@ It doesn't just wrap `curl`; it uses a dedicated rendering engine to convert wik
 
 ## Installation
 
-### The Quick Way
-This script clones the repo, builds the binary, and moves it to `/usr/local/bin`.
+### The Quick Way (Recommended)
+This script automatically installs all system dependencies (git, make, go) and builds the application.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/arch-wiki-tui/master/install.sh | sudo bash
+curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/arch-wiki-tui/master/install.sh -o install.sh && sudo bash install.sh && rm install.sh
 ```
 
 ### From Source
