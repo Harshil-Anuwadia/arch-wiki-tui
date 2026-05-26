@@ -1,45 +1,52 @@
 # archwiki-tui
 
-Minimalist terminal browser for the Arch Wiki. No browser overhead, no context switching. Just the documentation you need, formatted for the terminal you live in.
+A terminal browser for the Arch Wiki. No bloat. No browser. Just the wiki.
 
-I use Arch btw, and I want my wiki access to be just as efficient as my workflow.
+Because if you're already in a TTY fixing your bootloader, you shouldn't have to launch X11 just to read about kernel parameters.
 
-### Features
+## 1 Installation
 
-- **Fast**: Local title index for instant fuzzy search.
-- **Readable**: Dedicated rendering engine for MediaWiki tables and callouts.
-- **Clipboard**: Hit `c` to yank code blocks instantly.
-- **Offline**: Cache pages for when you're troubleshooting without a connection.
-- **Keyboard-driven**: Vim-like navigation (mostly).
-
-### Installation
-
+### 1.1 The Quick Way
 ```bash
 curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/arch-wiki-tui/master/install.sh | sudo bash
 ```
 
-*Note: Requires `go`, `make`, and `gcc` to build from source.*
-
-### Usage
+### 1.2 The Arch Way (Manual)
+Requires `go`, `make`, and `gcc`.
 
 ```bash
-archwiki          # Open home screen
-archwiki <query>  # Search directly
+git clone https://github.com/Harshil-Anuwadia/arch-wiki-tui
+cd arch-wiki-tui
+make build
+sudo cp bin/archwiki /usr/local/bin/
 ```
 
-### Keybindings
+## 2 Usage
 
-- `/`: Search
-- `j/k` or `arrows`: Navigate
-- `Enter`: Open page / Follow link
-- `c`: Copy code block under cursor
-- `b`: Back in history
-- `q` or `Esc`: Quit
+```bash
+archwiki          # Home screen
+archwiki <query>  # Direct search
+```
 
-### Why?
+## 3 Keybindings
 
-Because opening a Firefox tab to check a kernel parameter feels wrong when you're already in the TTY.
+* `/` : Search
+* `j`/`k` : Navigate (Vim keys, obviously)
+* `Enter` : Open page or follow link
+* `c` : Copy code block to clipboard
+* `b` : Go back in history
+* `q` : Quit
+
+## 4 Why this exists
+
+1. **KISS**: It does one thing and does it well.
+2. **Efficiency**: Fuzzy searching titles is faster than navigating a website.
+3. **Utility**: `c` to yank code blocks directly into your terminal saves time when you're lazy (and we all are).
+4. **Offline**: It caches what you read, because sometimes you break your networking.
+
+## 5 License
+
+MIT. 
 
 ---
-
-*Built with Bubble Tea. Keep it simple.*
+*I use Arch btw.*
