@@ -1,6 +1,15 @@
 # archwiki-tui
 
-`archwiki-tui` is a terminal client for searching and reading the Arch Wiki. It is built for users who want to stay in their terminal workflow and avoid the context-switching that comes with opening a web browser for documentation.
+```text
+    ___                __               _ __   _ 
+   /   |  _____________/ /_ _      _(_/ /__(_)
+  / /| | / ___/ ___/ __ \ | /| / / / //_/ / 
+ / ___ |/ /  / /__/ / / / |/ |/ / / / ,< / /  
+/_/  |_/_/   \___/_/ /_/\__/|__/_/_/_/|_/_/   
+```
+
+`archwiki-tui` is a terminal client for searching and reading the Arch Wiki.
+ It is built for users who want to stay in their terminal workflow and avoid the context-switching that comes with opening a web browser for documentation.
 
 It doesn't just wrap `curl`; it uses a dedicated rendering engine to convert wiki HTML into structured, readable documents with support for tables, callout boxes, and code block extraction.
 
