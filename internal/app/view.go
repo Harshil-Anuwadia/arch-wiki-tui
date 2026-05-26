@@ -764,14 +764,10 @@ func (m *Model) viewMainPanel(width, height int) string {
 }
 
 func (m *Model) viewHomeScreen(width int) string {
-	banner := `   Arch Wiki`
-
 	suggestion := m.homePrimarySuggestion()
 	recent := m.homeRecentTitles(3)
 
 	lines := []string{
-		m.styles.HeaderTitle.Render(banner),
-		"",
 		m.styles.ItemSelected.Render("/ Search Arch Wiki"),
 		"",
 		m.styles.Dim.Render("Suggested:"),
