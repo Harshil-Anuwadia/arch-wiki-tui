@@ -772,8 +772,6 @@ func (m *Model) viewHomeScreen(width int) string {
 	lines := []string{
 		m.styles.HeaderTitle.Render(banner),
 		"",
-		m.styles.Dim.Render("The definitive terminal browser for the Arch Wiki"),
-		"",
 		m.styles.ItemSelected.Render("/ Search Arch Wiki"),
 		"",
 		m.styles.Dim.Render("Suggested:"),
