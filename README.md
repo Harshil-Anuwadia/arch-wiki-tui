@@ -11,7 +11,12 @@ Because if you're already in a TTY fixing your bootloader, you shouldn't have to
 
 ## 1 Installation
 
-### 1.1 The Quick Way
+### 1.1 The AUR Way (Recommended for Arch Users)
+```bash
+yay -S archwiki-tui-git
+```
+
+### 1.2 The Quick Way (Other Distros)
 ```bash
 curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/archwiki-tui/master/install.sh | sudo bash
 ```
