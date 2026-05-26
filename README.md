@@ -6,6 +6,8 @@ Because if you're already in a TTY fixing your bootloader, you shouldn't have to
 
 **Note:** This is an initial beta release. Expect bugs. If it breaks your workflow, you get to keep the pieces. PRs welcome.
 
+![archwiki-tui demo](assets/demo.gif)
+
 
 ## 1 Installation
 
