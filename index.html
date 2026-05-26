@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>archwiki-tui | terminal browser</title>
+    <style>
+        :root {
+            --bg: #0c0c0c;
+            --surface: #141414;
+            --accent: #1793d1;
+            --text: #d1d1d1;
+            --dim: #555555;
+            --border: #2a2a2a;
+            --code-bg: #1a1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', 'Fira Code', 'IBM Plex Mono', 'Cascadia Code', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .layout {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header {
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .branding h1 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: lowercase;
+        }
+
+        .nav-links a {
+            color: var(--dim);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        .hero-text {
+            margin-bottom: 30px;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--dim);
+        }
+
+        .terminal-frame {
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .terminal-top {
+            background: var(--border);
+            padding: 5px 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--dim);
+        }
+
+        .terminal-content img {
+            width: 100%;
+            display: block;
+            opacity: 0.9;
+        }
+
+        h2 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+            margin-left: 20px;
+        }
+
+        .install-container {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            background: var(--code-bg);
+            border: 1px solid var(--accent);
+            padding: 20px;
+            align-items: center;
+        }
+
+        .install-container code {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 5px 12px;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .tech-card {
+            background: var(--bg);
+            padding: 25px;
+        }
+
+        .tech-card h3 {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .tech-card p {
+            color: var(--dim);
+            font-size: 0.9rem;
+        }
+
+        .keys-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--border);
+        }
+
+        .keys-table td {
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+        }
+
+        .keys-table td:first-child {
+            width: 120px;
+            color: var(--accent);
+            background: var(--surface);
+        }
+
+        .keys-table td:last-child {
+            color: var(--dim);
+        }
+
+        .requirements {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .req-tag {
+            border: 1px solid var(--border);
+            padding: 5px 12px;
+            font-size: 12px;
+            color: var(--dim);
+        }
+
+        footer {
+            margin-top: 100px;
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--dim);
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .nav-links { margin-left: 0; }
+            .nav-links a { margin-left: 0; margin-right: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <header>
+            <div class="branding">
+                <h1>archwiki-tui</h1>
+            </div>
+            <nav class="nav-links">
+                <a href="#install">install</a>
+                <a href="#features">specs</a>
+                <a href="#keys">keys</a>
+                <a href="https://github.com/Harshil-Anuwadia/archwiki-tui">github</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-text">
+                <p>browsing the arch linux wiki from the tty. no browser overhead. no context switching. built for technical workflows.</p>
+            </div>
+            <div class="terminal-frame">
+                <div class="terminal-top">
+                    <span>archwiki — 80x24</span>
+                    <span>v0.1.0-beta</span>
+                </div>
+                <div class="terminal-content">
+                    <img src="assets/demo.gif" alt="archwiki-tui terminal demo">
+                </div>
+            </div>
+        </section>
+
+        <section id="install">
+            <h2>01_INSTALLATION</h2>
+            <div class="install-container">
+                <code id="cmd">yay -S archwiki-tui-git</code>
+                <button class="copy-btn" onclick="copyCmd()">[copy]</button>
+            </div>
+            <div style="margin-top: 20px;" class="requirements">
+                <span class="req-tag">go 1.25+</span>
+                <span class="req-tag">make</span>
+                <span class="req-tag">gcc</span>
+                <span class="req-tag">git</span>
+            </div>
+        </section>
+
+        <section id="features">
+            <h2>02_SPECIFICATIONS</h2>
+            <div class="technical-grid">
+                <div class="tech-card">
+                    <h3>FUZZY_SEARCH</h3>
+                    <p>utilizes a local title index for zero-latency searching across thousands of wiki entries.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>TUI_ENGINE</h3>
+                    <p>custom mediawiki parser specifically designed for terminal-safe rendering of tables and callouts.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>CLIPBOARD_INTEGRATION</h3>
+                    <p>direct extraction of code blocks from wiki pages to system clipboard using the c key.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>LOCAL_CACHE</h3>
+                    <p>automatically persists visited pages to disk for offline survival during network outages.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>KISS_PHILOSOPHY</h3>
+                    <p>zero bloat implementation. no branding, no telemetry, no unnecessary headers.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>BUILT_WITH_GO</h3>
+                    <p>statically compiled binary for high performance and minimal system dependencies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="keys">
+            <h2>03_KEYBINDINGS</h2>
+            <table class="keys-table">
+                <tr><td>/</td><td>initialize search mode</td></tr>
+                <tr><td>j / k</td><td>vertical navigation (vim standard)</td></tr>
+                <tr><td>Enter</td><td>open selected page / follow link</td></tr>
+                <tr><td>c</td><td>yank code block under cursor</td></tr>
+                <tr><td>b</td><td>navigate back in history</td></tr>
+                <tr><td>q / Esc</td><td>exit application</td></tr>
+            </table>
+        </section>
+
+        <footer>
+            <span>i use arch btw.</span>
+            <span>mit license. prs welcome.</span>
+        </footer>
+    </div>
+
+    <script>
+        function copyCmd() {
+            const text = document.getElementById('cmd').innerText;
+            navigator.clipboard.writeText(text);
+            const btn = document.querySelector('.copy-btn');
+            btn.innerText = '[copied]';
+            setTimeout(() => { btn.innerText = '[copy]'; }, 2000);
+        }
+    </script>
+</body>
+</html>
