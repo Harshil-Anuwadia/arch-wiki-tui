@@ -11,15 +11,15 @@ Because if you're already in a TTY fixing your bootloader, you shouldn't have to
 
 ### 1.1 The Quick Way
 ```bash
-curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/arch-wiki-tui/master/install.sh | sudo bash
+curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/archwiki-tui/master/install.sh | sudo bash
 ```
 
 ### 1.2 The Arch Way (Manual)
 Requires `go`, `make`, and `gcc`.
 
 ```bash
-git clone https://github.com/Harshil-Anuwadia/arch-wiki-tui
-cd arch-wiki-tui
+git clone https://github.com/Harshil-Anuwadia/archwiki-tui
+cd archwiki-tui
 make build
 sudo cp bin/archwiki /usr/local/bin/
 ```

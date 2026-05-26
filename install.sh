@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-REPO_URL="https://github.com/Harshil-Anuwadia/arch-wiki-tui.git"
+REPO_URL="https://github.com/Harshil-Anuwadia/archwiki-tui.git"
 APP_NAME="archwiki"
 INSTALL_DIR="/usr/local/bin"
 
