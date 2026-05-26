@@ -9,19 +9,19 @@ Because if you're already in a TTY fixing your bootloader, you shouldn't have to
 **Note:** This is an initial beta release. Expect bugs. If it breaks your workflow, you get to keep the pieces. PRs welcome.
 
 
-## Installation
+## Install
 
-### The AUR Way (Recommended for Arch Users)
+### AUR
 ```bash
 yay -S archwiki-tui-git
 ```
 
-### The Quick Way (Other Distros)
+### Script
 ```bash
 curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/archwiki-tui/master/install.sh | sudo bash
 ```
 
-### The Arch Way (Manual)
+### Manual
 Requires `go`, `make`, and `gcc`.
 
 ```bash
@@ -38,7 +38,7 @@ archwiki          # Home screen
 archwiki <query>  # Direct search
 ```
 
-## Keybindings
+## Keys
 
 * `/` : Search
 * `j`/`k` : Navigate (Vim keys, obviously)
@@ -47,14 +47,14 @@ archwiki <query>  # Direct search
 * `b` : Go back in history
 * `q` : Quit
 
-## Why this exists
+## Why
 
 1. **KISS**: It does one thing and does it well.
 2. **Efficiency**: Fuzzy searching titles is faster than navigating a website.
 3. **Utility**: `c` to yank code blocks directly into your terminal saves time when you're lazy (and we all are).
 4. **Offline**: It caches what you read, because sometimes you break your networking.
 
-## Contributing
+## Contribute
 
 Contributions are welcome. If you want to help improve the project:
 
