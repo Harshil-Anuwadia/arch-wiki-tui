@@ -1,69 +1,45 @@
 # archwiki-tui
 
-```text
-  ▄▀█ █▀█ █▀▀ █░█ █   █ █ █▄▀ █
-  █▀█ █▀▄ █▄▄ █▀█ █▄█▄█ █ █░█ █
-```
+Minimalist terminal browser for the Arch Wiki. No browser overhead, no context switching. Just the documentation you need, formatted for the terminal you live in.
 
-`archwiki-tui` is a terminal client for searching and reading the Arch Wiki. It is built for users who want to stay in their terminal workflow and avoid the context-switching that comes with opening a web browser for documentation.
+I use Arch btw, and I want my wiki access to be just as efficient as my workflow.
 
-It doesn't just wrap `curl`; it uses a dedicated rendering engine to convert wiki HTML into structured, readable documents with support for tables, callout boxes, and code block extraction.
+### Features
 
-## Features
+- **Fast**: Local title index for instant fuzzy search.
+- **Readable**: Dedicated rendering engine for MediaWiki tables and callouts.
+- **Clipboard**: Hit `c` to yank code blocks instantly.
+- **Offline**: Cache pages for when you're troubleshooting without a connection.
+- **Keyboard-driven**: Vim-like navigation (mostly).
 
-- **Fast Search**: Uses a local title index for instant fuzzy-finding, with live API enrichment.
-- **Technical Rendering**: Specifically handles MediaWiki tables and styled callouts (Warnings, Notes, Tips) for the terminal.
-- **Offline Reading**: Support for local page caching and downloading page bundles for offline survival.
-- **Developer Workflow**: Single-key (`c`) extraction of code blocks to your clipboard.
-- **Breadcrumbs**: A visual navigation tree (`Ctrl+Y`) to track your browsing history across pages.
-- **Deep Links**: Tab-based access to related articles and all external links found in the text.
-
-## Installation
-
-### The Quick Way (Recommended)
-This script automatically installs all system dependencies (git, make, go) and builds the application.
+### Installation
 
 ```bash
-curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/arch-wiki-tui/master/install.sh -o install.sh && sudo bash install.sh && rm install.sh
+curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/arch-wiki-tui/master/install.sh | sudo bash
 ```
 
-### From Source
-Requires Go 1.25+.
+*Note: Requires `go`, `make`, and `gcc` to build from source.*
+
+### Usage
 
 ```bash
-git clone https://github.com/Harshil-Anuwadia/arch-wiki-tui.git
-cd arch-wiki-tui
-make build
-./bin/archwiki
+archwiki          # Open home screen
+archwiki <query>  # Search directly
 ```
 
-## Usage
+### Keybindings
 
-Start the interactive UI:
-```bash
-archwiki
-```
+- `/`: Search
+- `j/k` or `arrows`: Navigate
+- `Enter`: Open page / Follow link
+- `c`: Copy code block under cursor
+- `b`: Back in history
+- `q` or `Esc`: Quit
 
-Pass a query directly:
-```bash
-archwiki systemd
-```
+### Why?
 
-### Essential Keys
+Because opening a Firefox tab to check a kernel parameter feels wrong when you're already in the TTY.
 
-- `/` : Search
-- `j` / `k` : Scroll article
-- `Tab` : Cycle through tabs (Article / Related / Links)
-- `c` : Copy next code block to clipboard
-- `o` : Open current page in browser
-- `Ctrl+P` : Jump to section (TOC)
-- `Ctrl+Y` : Navigation map
-- `q` : Back / Quit
+---
 
-## Contributing
-
-The project is in beta. We are particularly interested in fixes for the HTML-to-Markdown engine and feedback on terminal emulator compatibility. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
-
-## License
-
-MIT
+*Built with Bubble Tea. Keep it simple.*
