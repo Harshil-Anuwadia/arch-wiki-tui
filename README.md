@@ -1,90 +1,64 @@
-<div align="center">
+# archwiki-tui
 
-# 🏛️ archwiki-tui
+`archwiki-tui` is a terminal client for searching and reading the Arch Wiki. It is built for users who want to stay in their terminal workflow and avoid the context-switching that comes with opening a web browser for documentation.
 
-**The definitive terminal browser for the Arch Wiki.**
+It doesn't just wrap `curl`; it uses a dedicated rendering engine to convert wiki HTML into structured, readable documents with support for tables, callout boxes, and code block extraction.
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/Harshil-Anuwadia/arch-wiki-tui)](https://goreportcard.com/report/github.com/Harshil-Anuwadia/arch-wiki-tui)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Go Version](https://img.shields.io/github/go-mod/go-version/Harshil-Anuwadia/arch-wiki-tui)](https://go.dev/)
-[![Beta](https://img.shields.io/badge/status-beta-orange.svg)]()
+## Features
 
----
+- **Fast Search**: Uses a local title index for instant fuzzy-finding, with live API enrichment.
+- **Technical Rendering**: Specifically handles MediaWiki tables and styled callouts (Warnings, Notes, Tips) for the terminal.
+- **Offline Reading**: Support for local page caching and downloading page bundles for offline survival.
+- **Developer Workflow**: Single-key (`c`) extraction of code blocks to your clipboard.
+- **Breadcrumbs**: A visual navigation tree (`Ctrl+Y`) to track your browsing history across pages.
+- **Deep Links**: Tab-based access to related articles and all external links found in the text.
 
-`archwiki-tui` is a performance-focused, keyboard-first terminal client for the Arch Wiki. 
-Stop breaking your flow by jumping to a browser—access the world's best Linux documentation directly in your multiplexer.
+## Installation
 
-[Features](#-key-features) • [Installation](#-installation) • [Usage](#-quick-start) • [Contributing](#-contributing)
+### The Quick Way
+This script clones the repo, builds the binary, and moves it to `/usr/local/bin`.
 
-</div>
-
-## 💡 Why archwiki-tui?
-
-Most TUI wiki clients are simple wrappers around `curl`. `archwiki-tui` is different:
-- It **understands** the wiki structure, extracting code blocks and tables specifically for terminal width.
-- It **remembers** your journey, building a navigation tree as you browse.
-- It **works offline**, so you can fix your system even when your network is down.
-
----
-
-## 🚀 Installation
-
-### The One-Liner (Standard Linux)
 ```bash
 curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/arch-wiki-tui/master/install.sh | sudo bash
 ```
 
-### Manual Build
+### From Source
+Requires Go 1.25+.
+
 ```bash
 git clone https://github.com/Harshil-Anuwadia/arch-wiki-tui.git
 cd arch-wiki-tui
 make build
-# Binary is in ./bin/archwiki
+./bin/archwiki
 ```
 
----
+## Usage
 
-## ✨ Key Features
+Start the interactive UI:
+```bash
+archwiki
+```
 
-- 🔍 **Hybrid Search Engine** — Uses a local title index for instant fuzzy-finding, then pulls live snippets from the API.
-- 🎨 **Glamour Rendering** — Beautifully formatted Markdown with terminal-optimized colors and styles.
-- 📦 **Offline Bundles** — Press `D` on any page to download it and all its internal links for offline survival.
-- 📋 **Code Extraction** — Hit `c` to instantly copy the next command block to your clipboard.
-- 🗺️ **Navigation Map** — `Ctrl+Y` shows your browsing history as a visual tree.
-- 📑 **Integrated TOC** — `Ctrl+P` lets you jump to any section without scrolling.
+Pass a query directly:
+```bash
+archwiki systemd
+```
 
----
+### Essential Keys
 
-## ⌨️ Essential Controls
+- `/` : Search
+- `j` / `k` : Scroll article
+- `Tab` : Cycle through tabs (Article / Related / Links)
+- `c` : Copy next code block to clipboard
+- `o` : Open current page in browser
+- `Ctrl+P` : Jump to section (TOC)
+- `Ctrl+Y` : Navigation map
+- `q` : Back / Quit
 
-| Key | Action |
-|-----|--------|
-| `/` | Start Searching |
-| `j` / `k` | Scroll Article |
-| `Tab` | Next Tab (Article / Related / Links) |
-| `c` | Copy Code Block |
-| `o` | Open in Browser (External links) |
-| `Ctrl+P` | Table of Contents |
-| `Ctrl+Y` | Navigation History |
-| `q` | Quit / Back |
+## Contributing
 
----
+The project is in beta. We are particularly interested in fixes for the HTML-to-Markdown engine and feedback on terminal emulator compatibility. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-## 🤝 Contributing
+## License
 
-This project is in **Beta**. We need help with:
-- Testing on different terminal emulators.
-- Improving the HTML-to-Markdown conversion engine.
-- Adding support for other MediaWiki-based wikis (Gentoo, Debian, etc).
-
-Check out [CONTRIBUTING.md](CONTRIBUTING.md) to get started!
-
----
-
-## ⚖️ License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-<div align="center">
-  <sub>Built with ❤️ for the Linux Community</sub>
-</div>
+MIT
