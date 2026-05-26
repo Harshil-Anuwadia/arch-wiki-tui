@@ -50,23 +50,25 @@ install_pkg() {
     info "Installing missing dependency: $1..."
     case "$DISTRO" in
         arch|manjaro) pacman -S --needed --noconfirm "$@" ;;
-        ubuntu|debian|kali|pop|linuxmint) 
+        ubuntu|debian|kali|pop|linuxmint|raspbian) 
             apt-get update -qq
             apt-get install -y -qq "$@" 
             ;;
-        fedora|rhel|centos) dnf install -y -q "$@" ;;
-        *) info "Unsupported distro for auto-install. Please install '$1' manually." ;;
+        fedora|rhel|centos|rocky|almalinux) dnf install -y -q "$@" ;;
+        suse|opensuse*) zypper install -y "$@" ;;
+        *) info "Unsupported distro ($DISTRO) for auto-install. Please install '$1' manually." ;;
     esac
 }
 
-# Ensure build tools are present
+# Ensure core build tools are present
+info "Verifying system dependencies..."
 for cmd in git make gcc curl tar; do
     if ! command -v "$cmd" &> /dev/null; then
         pkg=$cmd
         if [ "$cmd" == "gcc" ]; then
             case "$DISTRO" in
-                ubuntu|debian) pkg="build-essential" ;;
-                fedora) pkg="gcc gcc-c++" ;;
+                ubuntu|debian|kali|pop|linuxmint) pkg="build-essential" ;;
+                fedora|rhel|centos) pkg="gcc gcc-c++" ;;
             esac
         fi
         install_pkg "$pkg"
@@ -74,7 +76,8 @@ for cmd in git make gcc curl tar; do
 done
 
 # Handle Go dependency
-if ! command -v go &> /dev/null; then
+GO_PATH="/usr/local/go/bin/go"
+if ! command -v go &> /dev/null && [ ! -f "$GO_PATH" ]; then
     GO_VER="1.25.0"
     info "Go not found. Installing Go ${GO_VER}..."
     GO_ARCH="amd64"
@@ -86,8 +89,12 @@ if ! command -v go &> /dev/null; then
     rm -rf /usr/local/go
     tar -C /usr/local -xzf "$GO_TMP"
     rm "$GO_TMP"
-    export PATH=$PATH:/usr/local/go/bin
     success "Go installed to /usr/local/go."
+fi
+
+# Ensure we use the right Go binary
+if [ -f "$GO_PATH" ]; then
+    export PATH="/usr/local/go/bin:$PATH"
 fi
 
 # Build from source
@@ -98,9 +105,16 @@ git clone --depth 1 "$REPO_URL" "$TMP_DIR" &> /dev/null || error "Failed to clon
 cd "$TMP_DIR"
 
 info "Building $APP_NAME..."
-# Ensure the new Go is in PATH for the build subshell
-export PATH=$PATH:/usr/local/go/bin
-make build &> /dev/null || error "Build failed. Ensure 'make' and 'go' are functional."
+# We run make with an explicit GO variable to ensure it uses the one we just installed
+if ! make build GO="$(command -v go)"; then
+    echo "--------------------------------------------------"
+    echo "BUILD FAILED. Diagnostic Information:"
+    echo "Go Version: $(go version || echo 'Not Found')"
+    echo "Make Version: $(make --version | head -n 1 || echo 'Not Found')"
+    echo "PATH: $PATH"
+    echo "--------------------------------------------------"
+    error "Build failed. See logs above for details."
+fi
 
 # Final installation
 info "Deploying binary to $INSTALL_DIR/$APP_NAME..."
