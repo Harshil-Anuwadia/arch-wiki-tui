@@ -1,6 +1,6 @@
 # Build artifacts
 bin/
-archwiki
+/archwiki
 
 # Logs and temporary files
 *.log
