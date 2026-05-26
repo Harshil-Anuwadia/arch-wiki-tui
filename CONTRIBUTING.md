@@ -40,7 +40,7 @@ This project and everyone participating in it is governed by a standard professi
 
 1. Install Go 1.25 or later.
 2. Clone your fork.
-3. Run `make deps` to install dependencies.
+3. Run `make tidy` to sync module dependencies.
 4. Run `make build` to build the binary.
 
 Happy hacking!
