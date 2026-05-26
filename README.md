@@ -9,19 +9,19 @@ Because if you're already in a TTY fixing your bootloader, you shouldn't have to
 **Note:** This is an initial beta release. Expect bugs. If it breaks your workflow, you get to keep the pieces. PRs welcome.
 
 
-## 1 Installation
+## Installation
 
-### 1.1 The AUR Way (Recommended for Arch Users)
+### The AUR Way (Recommended for Arch Users)
 ```bash
 yay -S archwiki-tui-git
 ```
 
-### 1.2 The Quick Way (Other Distros)
+### The Quick Way (Other Distros)
 ```bash
 curl -sL https://raw.githubusercontent.com/Harshil-Anuwadia/archwiki-tui/master/install.sh | sudo bash
 ```
 
-### 1.2 The Arch Way (Manual)
+### The Arch Way (Manual)
 Requires `go`, `make`, and `gcc`.
 
 ```bash
@@ -31,14 +31,14 @@ make build
 sudo cp bin/archwiki /usr/local/bin/
 ```
 
-## 2 Usage
+## Usage
 
 ```bash
 archwiki          # Home screen
 archwiki <query>  # Direct search
 ```
 
-## 3 Keybindings
+## Keybindings
 
 * `/` : Search
 * `j`/`k` : Navigate (Vim keys, obviously)
@@ -47,14 +47,14 @@ archwiki <query>  # Direct search
 * `b` : Go back in history
 * `q` : Quit
 
-## 4 Why this exists
+## Why this exists
 
 1. **KISS**: It does one thing and does it well.
 2. **Efficiency**: Fuzzy searching titles is faster than navigating a website.
 3. **Utility**: `c` to yank code blocks directly into your terminal saves time when you're lazy (and we all are).
 4. **Offline**: It caches what you read, because sometimes you break your networking.
 
-## 5 Contributing
+## Contributing
 
 Contributions are welcome. If you want to help improve the project:
 
@@ -62,11 +62,11 @@ Contributions are welcome. If you want to help improve the project:
 2. Use the [Issue Templates](https://github.com/Harshil-Anuwadia/archwiki-tui/issues/new/choose) for bugs and features.
 3. Submit a PR.
 
-## 6 Changelog
+## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for release history.
 
-## 7 License
+## License
 
 [MIT](LICENSE). 
 
