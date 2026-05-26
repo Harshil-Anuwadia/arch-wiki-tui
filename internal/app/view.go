@@ -764,25 +764,35 @@ func (m *Model) viewMainPanel(width, height int) string {
 }
 
 func (m *Model) viewHomeScreen(width int) string {
-	if width < 24 {
-		return "/ Search Arch Wiki"
+	banner := `   archwiki-tui
+   ────────────`
+	if width >= 60 {
+		banner = `    ___                __               _ __   _ 
+   /   |  _____________/ /_ _      _(_/ /__(_)
+  / /| | / ___/ ___/ __ \ | /| / / / //_/ / 
+ / ___ |/ /  / /__/ / / / |/ |/ / / / ,< / /  
+/_/  |_/_/   \___/_/ /_/\__/|__/_/_/_/|_/_/   `
 	}
 
 	suggestion := m.homePrimarySuggestion()
 	recent := m.homeRecentTitles(3)
 
 	lines := []string{
-		m.styles.Dim.Render("Terminal Wiki Reader"),
+		m.styles.HeaderTitle.Render(banner),
+		"",
+		m.styles.Dim.Render("The definitive terminal browser for the Arch Wiki"),
 		"",
 		m.styles.ItemSelected.Render("/ Search Arch Wiki"),
 		"",
 		m.styles.Dim.Render("Suggested:"),
 		m.styles.ItemSelected.Render("  > " + suggestion),
-		"",
-		m.styles.Dim.Render("Recent:"),
 	}
-	for _, title := range recent {
-		lines = append(lines, "  "+title)
+
+	if len(recent) > 0 {
+		lines = append(lines, "", m.styles.Dim.Render("Recent:"))
+		for _, title := range recent {
+			lines = append(lines, "  "+title)
+		}
 	}
 
 	if m.bootstrapQuery != "" {
