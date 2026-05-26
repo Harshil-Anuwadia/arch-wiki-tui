@@ -5,7 +5,7 @@
 
 set -e
 
-REPO_URL="https://github.com/USERNAME/archwiki-tui.git"
+REPO_URL="https://github.com/Harshil-Anuwadia/arch-wiki-tui.git"
 INSTALL_DIR="/usr/local/bin"
 APP_NAME="archwiki"
 
