@@ -766,10 +766,6 @@ func (m *Model) viewMainPanel(width, height int) string {
 func (m *Model) viewHomeScreen(width int) string {
 	banner := `   archwiki-tui
    ────────────`
-	if width >= 60 {
-		banner = `  ▄▀█ █▀█ █▀▀ █░█ █   █ █ █▄▀ █
-  █▀█ █▀▄ █▄▄ █▀█ █▄█▄█ █ █░█ █`
-	}
 
 	suggestion := m.homePrimarySuggestion()
 	recent := m.homeRecentTitles(3)
